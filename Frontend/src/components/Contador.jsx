@@ -1,65 +1,54 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 const Contador = () => {
-    const [timeLeft, setTimeLeft] = useState({
-        days: 0,
-        hours: 0,
-        minutes: 0,
-        seconds: 0
-    });
 
+    const targetDate = new Date("2025-02-10T00:00:00").getTime();
+    const [timeLeft, setTimeLeft] = useState(targetDate - Date.now());
+  
     useEffect(() => {
-        const targetDate = new Date('February 10, 2025 00:00:00').getTime();
+      const interval = setInterval(() => {
+        setTimeLeft(targetDate - Date.now());
+      }, 1000);
+  
+      return () => clearInterval(interval);
+    }, [targetDate]);
+  
+    const formatTime = (ms) => {
+      const seconds = Math.floor((ms / 1000) % 60);
+      const minutes = Math.floor((ms / 1000 / 60) % 60);
+      const hours = Math.floor((ms / (1000 * 60 * 60)) % 24);
+      const days = Math.floor(ms / (1000 * 60 * 60 * 24));
+      return { days, hours, minutes, seconds };
+    };
+  
+    const { days, hours, minutes, seconds } = formatTime(timeLeft);
 
-        const interval = setInterval(() => {
-            const now = new Date().getTime();
-            const distance = targetDate - now;
-
-            if (distance < 0) {
-                clearInterval(interval);
-                setTimeLeft(null);
-                return;
-            }
-
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            setTimeLeft({ days, hours, minutes, seconds });
-        }, 1000);
-
-        return () => clearInterval(interval);
-    }, []);
-
-    return (
-        <div className="flex flex-col items-center justify-center mt-20 text-white">
-            <div className="text-2xl">
-                {timeLeft ? (
-                    <div className="flex space-x-20">
-                        <div className="flex flex-col items-center">
-                            <span className="font-mono text-6xl bg-gray-800 p-4 rounded-lg">{timeLeft.days}</span>
-                            <span className="mt-2">Días</span>
-                        </div>
-                        <div className="flex flex-col items-center">
-                            <span className="font-mono text-6xl bg-gray-800 p-4 rounded-lg">{timeLeft.hours}</span>
-                            <span className="mt-2">Horas</span>
-                        </div>
-                        <div className="flex flex-col items-center">
-                            <span className="font-mono text-6xl bg-gray-800 p-4 rounded-lg">{timeLeft.minutes}</span>
-                            <span className="mt-2">Minutos</span>
-                        </div>
-                        <div className="flex flex-col items-center">
-                            <span className="font-mono text-6xl bg-gray-800 p-4 rounded-lg">{timeLeft.seconds}</span>
-                            <span className="mt-2">Segundos</span>
-                        </div>
-                    </div>
-                ) : (
-                    <span className="text-4xl">¡La espera ha finalizado!</span>
-                )}
-            </div>
+  return (
+    <div className="flex flex-col items-center justify-center text-white text-center p-4">
+      <div className="flex space-x-4 text-4xl md:text-6xl font-bold mt-6">
+        <div className="text-center">
+          <span>{days.toString().padStart(2, '0')}</span>
+          <div className="text-sm md:text-base text-gray-400 uppercase">Days</div>
         </div>
-    );
+        <span>:</span>
+        <div className="text-center">
+          <span>{hours.toString().padStart(2, '0')}</span>
+          <div className="text-sm md:text-base text-gray-400 uppercase">Hours</div>
+        </div>
+        <span>:</span>
+        <div className="text-center">
+          <span>{minutes.toString().padStart(2, '0')}</span>
+          <div className="text-sm md:text-base text-gray-400 uppercase">Minutes</div>
+        </div>
+        <span>:</span>
+        <div className="text-center">
+          <span>{seconds.toString().padStart(2, '0')}</span>
+          <div className="text-sm md:text-base text-gray-400 uppercase">Seconds</div>
+        </div>
+      </div>
+    </div>
+  );
 };
 
-export default Contador;
+
+export default Contador
