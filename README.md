@@ -1,2 +1,8 @@
-# NakamaCoomingsoon
-En construcción o cooming soon será diseñada para mostrar el avance de la empresa, para mientras tanto ir captando informacion como el mail de futuros prospectos o clientes o para generar leads. Hasta que la web oficial se encuentre finalizada.
+# React + Vite
+
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+
+Currently, two official plugins are available:
+
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
