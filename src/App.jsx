@@ -6,9 +6,7 @@ import { FaXTwitter } from "react-icons/fa6";
 function App() {
   return (
     <div className="flex flex-col items-center justify-center h-screen text-white text-center p-4">
-      <div className="absolute left-4 top-1/2 transform -translate-y-1/2 flex flex-col space-y-4">
-        <div>
-        </div>
+      <div className="absolute left-4 top-1/2 transform -translate-y-1/2 flex-col space-y-4 hidden sm:flex">
         <a
           href="https://www.instagram.com/nakama.tec/"
           target="_blank"
