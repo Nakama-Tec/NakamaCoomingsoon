@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+.fondo {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.5)), url("https://raona.com/wp-content/uploads/2023/12/adoption_empleados_reunidos.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  position: relative;
+}
